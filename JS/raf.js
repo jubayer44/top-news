@@ -18,7 +18,7 @@ const displayNews = (allNewsCategories) => {
 
     if (viewCategories.length === 0) {
         // console.log('No News Found In This Category')
-        resultFound.innerText = 'No News Found In This Category';
+        resultFound.innerText = 'News Not Found In This Category';
         resultsContainer.classList.remove('d-none')
         return
     }

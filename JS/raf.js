@@ -1,11 +1,17 @@
+const cardsContainer = document.getElementById('cards-container')
+
+
 
 const findCategories = (id) => {
+    // spinner start
+    loadingSpinner(true)
     // console.log(id)
     fetch(`https://openapi.programming-hero.com/api/news/category/${id}`)
         .then(res => res.json())
         .then(data => displayNews(data))
         .catch(error => console.log(error))
 }
+
 
 const displayNews = (allNewsCategories) => {
 
@@ -20,6 +26,10 @@ const displayNews = (allNewsCategories) => {
         // console.log('No News Found In This Category')
         resultFound.innerText = 'News Not Found In This Category';
         resultsContainer.classList.remove('d-none')
+        cardsContainer.textContent = '';
+        //spinner stop
+        loadingSpinner(false)          
+        // const spinner = document.getElementById('spinner')
         return
     }
 
@@ -30,9 +40,9 @@ const displayNews = (allNewsCategories) => {
         
     }
 
-    const cardsContainer = document.getElementById('cards-container')
+    // const cardsContainer = document.getElementById('cards-container')
     cardsContainer.textContent = '';
-    
+
     viewCategories.forEach(singleCategories => {
         const {title, image_url, details, author} = singleCategories
         // console.log(author.name)
@@ -42,12 +52,12 @@ const displayNews = (allNewsCategories) => {
         CardDiv.innerHTML = `
         <div class="row g-0">
                           <div class="col-md-4">
-                            <img src="..." class="img-fluid rounded-start" alt="...">
+                            <img src="${image_url}" class="img-fluid rounded-start" alt="...">
                           </div>
                           <div class="col-md-8">
                             <div class="card-body">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              <h5 class="card-title">${title}</h5>
+                              <p class="card-text">${details}</p>
                               <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                           </div>
@@ -55,7 +65,8 @@ const displayNews = (allNewsCategories) => {
         `;
         cardsContainer.appendChild(CardDiv)
 
-
+        //spinner stop
+        loadingSpinner(false)
     })
 
 }
@@ -84,6 +95,18 @@ const displayCategory = (categories) => {
         categoriesContainer.appendChild(categoryText)
     });
 }
+
+    //spinner function
+const spinner = document.getElementById('spinner')
+    const loadingSpinner = (isLoading) => {
+        if(isLoading){
+            spinner.classList.remove('d-none')
+        }
+        else {
+            spinner.classList.add('d-none')
+        }
+    }
+
 loadCategory()
 
 

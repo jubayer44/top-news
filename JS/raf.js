@@ -44,20 +44,20 @@ const displayNews = (allNewsCategories) => {
     cardsContainer.textContent = '';
 
     viewCategories.forEach(singleCategories => {
-        const {title, image_url, details, author} = singleCategories
-        // console.log(author.name)
+        const {title, image_url, thumbnail_url, details, author, total_view, rating} = singleCategories
+        console.log(singleCategories)
 
         const CardDiv = document.createElement('div')
         CardDiv.classList.add('card', 'mb-3', 'my-3')
         CardDiv.innerHTML = `
         <div class="row g-0">
-                          <div class="col-md-4">
-                            <img src="${image_url}" class="img-fluid rounded-start" alt="...">
+                          <div class="col-md-3">
+                            <img src="${thumbnail_url}" class="w-100 rounded-start" alt="...">
                           </div>
-                          <div class="col-md-8">
+                          <div class="col-md-9">
                             <div class="card-body">
-                              <h5 class="card-title">${title}</h5>
-                              <p class="card-text">${details}</p>
+                              <h3 class="card-title">${title}</h2>
+                              <p class="card-text">${details.length > 100 ? details.slice(0, 250) + '...' : details}</p>
                               <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                             </div>
                           </div>

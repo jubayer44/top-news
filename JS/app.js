@@ -57,18 +57,24 @@ const displayNews = (allNewsCategories) => {
                 <div class="col-md-9">
                     <div class="card-body">
                         <h3 class="card-title">${title}</h2>
-                        <p class="card-text">${details.length > 100 ? details.slice(0, 250) + '...' : details}</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-
-                        <div class="d-flex gap-2">
-                            <img class="rounded-circle ms-md-4" src="${author.img}" alt="" style="width: 50px; height: 50px;">
-                            <div>
-                                <h5>${author.name ? author.name : 'N/A'}</h5>
-                                <p>${author.published_date ? author.published_date : 'N/A'}</p>
+                        <p class="card-text">${details.length > 500 ? details.slice(0, 500) + '...' : details}</p>
+                        
+                        <div class="d-md-flex justify-content-between" style="margin-top: 15%">
+                        
+                            <div class="d-flex gap-2">
+                                <img class="rounded-circle" src="${author.img}" alt="" style="width: 50px; height: 50px;">
+                                <div>
+                                    <h5>${author.name ? author.name : 'N/A'}</h5>
+                                    <p>${author.published_date ? author.published_date : 'N/A'}</p>
+                                </div>
                             </div>
+
+                            <p><i class="fa-regular fa-eye me-2"></i>${total_view}</p>
+                            <p>Rating: ${rating.number}</p>
+                            <button class="btn btn-primary h-25">Details</button>
                         </div>
 
-                    </div>
+                    </>
                 </div>
             </div>
         `;

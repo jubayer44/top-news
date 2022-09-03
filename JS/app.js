@@ -43,9 +43,13 @@ const displayNews = (allNewsCategories) => {
     // const cardsContainer = document.getElementById('cards-container')
     cardsContainer.textContent = '';
 
+    // let arrayNum = []
+    // let arrayElement = []
     viewCategories.forEach(singleCategories => {
         const { title, image_url, thumbnail_url, details, author, total_view, rating } = singleCategories
-        console.log(singleCategories)
+        // arrayNum.push(total_view, singleCategories)  
+        // arrayElement.push(total_view)
+        // console.log(singleCategories.details)
 
         const CardDiv = document.createElement('div')
         CardDiv.classList.add('card', 'mb-3', 'my-3')
@@ -60,7 +64,6 @@ const displayNews = (allNewsCategories) => {
                         <p class="card-text">${details.length > 500 ? details.slice(0, 500) + '...' : details}</p>
                         
                         <div class="d-md-flex justify-content-between" style="margin-top: 15%">
-                        
                             <div class="d-flex gap-2">
                                 <img class="rounded-circle" src="${author.img}" alt="" style="width: 50px; height: 50px;">
                                 <div>
@@ -68,10 +71,9 @@ const displayNews = (allNewsCategories) => {
                                     <p>${author.published_date ? author.published_date : 'N/A'}</p>
                                 </div>
                             </div>
-
                             <p><i class="fa-regular fa-eye me-2"></i>${total_view}</p>
                             <p>Rating: ${rating.number}</p>
-                            <button class="btn btn-primary h-25">Details</button>
+                            <button onclick="newsModal('${image_url}', '${title}', '${details.slice(0, 95) + '...'}')" class="btn btn-primary h-25" data-bs-toggle="modal" data-bs-target="#newsModal">View</button>
                         </div>
 
                     </>
@@ -83,6 +85,14 @@ const displayNews = (allNewsCategories) => {
         //spinner stop
         loadingSpinner(false)
     })
+
+
+    // console.log(arrayNum.sort((a, b) => b-a), arrayElement)
+    // function findBySort(element) {
+
+        // console.log(arrayNum.sort((a, b) => b-a))
+       
+    // }
 
 }
 // findCategories()
@@ -110,6 +120,22 @@ const displayCategory = (categories) => {
         categoriesContainer.appendChild(categoryText)
     });
 }
+
+    // Modal 
+
+    const modalTitle = document.getElementById('newsModalLabel')
+    const modalBody = document.getElementById('modal-body')
+    const newsModal = (img, title, details) => {
+
+        console.log(details)
+        modalTitle.innerText = `${title}`;
+        modalBody.innerHTML = `
+        <img src="${img}" class="w-100 rounded-start" alt="...">
+        <p class="mt-4">${details}</p>
+        `;
+
+    }
+
 
 //spinner function
 const spinner = document.getElementById('spinner')

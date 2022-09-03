@@ -28,7 +28,7 @@ const displayNews = (allNewsCategories) => {
         resultsContainer.classList.remove('d-none')
         cardsContainer.textContent = '';
         //spinner stop
-        loadingSpinner(false)          
+        loadingSpinner(false)
         // const spinner = document.getElementById('spinner')
         return
     }
@@ -37,31 +37,40 @@ const displayNews = (allNewsCategories) => {
         // console.log(viewCategories.length + ' News Found In This Category')
         resultFound.innerText = viewCategories.length + ' News Found In This Category';
         resultsContainer.classList.remove('d-none')
-        
+
     }
 
     // const cardsContainer = document.getElementById('cards-container')
     cardsContainer.textContent = '';
 
     viewCategories.forEach(singleCategories => {
-        const {title, image_url, thumbnail_url, details, author, total_view, rating} = singleCategories
+        const { title, image_url, thumbnail_url, details, author, total_view, rating } = singleCategories
         console.log(singleCategories)
 
         const CardDiv = document.createElement('div')
         CardDiv.classList.add('card', 'mb-3', 'my-3')
         CardDiv.innerHTML = `
-        <div class="row g-0">
-                          <div class="col-md-3">
-                            <img src="${thumbnail_url}" class="w-100 rounded-start" alt="...">
-                          </div>
-                          <div class="col-md-9">
-                            <div class="card-body">
-                              <h3 class="card-title">${title}</h2>
-                              <p class="card-text">${details.length > 100 ? details.slice(0, 250) + '...' : details}</p>
-                              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div class="row g-0">
+                <div class="col-md-3">
+                    <img src="${thumbnail_url}" class="w-100 rounded-start" alt="...">
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body">
+                        <h3 class="card-title">${title}</h2>
+                        <p class="card-text">${details.length > 100 ? details.slice(0, 250) + '...' : details}</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+                        <div class="d-flex gap-2">
+                            <img class="rounded-circle ms-md-4" src="${author.img}" alt="" style="width: 50px; height: 50px;">
+                            <div>
+                                <h5>${author.name ? author.name : 'N/A'}</h5>
+                                <p>${author.published_date ? author.published_date : 'N/A'}</p>
                             </div>
-                          </div>
                         </div>
+
+                    </div>
+                </div>
+            </div>
         `;
         cardsContainer.appendChild(CardDiv)
 
@@ -96,16 +105,16 @@ const displayCategory = (categories) => {
     });
 }
 
-    //spinner function
+//spinner function
 const spinner = document.getElementById('spinner')
-    const loadingSpinner = (isLoading) => {
-        if(isLoading){
-            spinner.classList.remove('d-none')
-        }
-        else {
-            spinner.classList.add('d-none')
-        }
+const loadingSpinner = (isLoading) => {
+    if (isLoading) {
+        spinner.classList.remove('d-none')
     }
+    else {
+        spinner.classList.add('d-none')
+    }
+}
 
 loadCategory()
 

@@ -73,7 +73,9 @@ const displayNews = (allNewsCategories) => {
                             </div>
                             <p><i class="fa-regular fa-eye me-2"></i>${total_view}</p>
                             <p>Rating: ${rating.number}</p>
-                            <button onclick="newsModal('${image_url}', '${title}', '${details.slice(0, 95) + '...'}')" class="btn btn-primary h-25" data-bs-toggle="modal" data-bs-target="#newsModal">View</button>
+                            <button onclick="openModal('${title}', '${image_url}', '${total_view}', '${author.img}', '${author.name ? author.name : 'N/A'}', '${author.published_date ? author.published_date : 'N/A'}')" type="button" class="btn btn-primary h-25" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Details
+                          </button>
                         </div>
 
                     </>
@@ -100,18 +102,25 @@ const displayNews = (allNewsCategories) => {
 
    // Modal 
 
-   const modalTitle = document.getElementById('newsModalLabel')
-   const modalBody = document.getElementById('modal-body')
-   const newsModal = (img, title, details) => {
+   const modalTitle = document.getElementById('exampleModalLabel')
+const modalBody = document.getElementById('modals-body')
+const openModal = (title, img, view, authImg, name, date) => {
 
-       console.log(details)
-       modalTitle.innerText = `${title}`;
-       modalBody.innerHTML = `
-       <img src="${img}" class="w-100 rounded-start" alt="...">
-       <p class="mt-4">${details}</p>
-       `;
+    modalTitle.innerText = `${title}`;
+    modalBody.innerHTML = `
+    <img src="${img}" class="w-100 rounded-start" alt="...">
+    
+    <div class="d-flex gap-2 mt-3">
+         <img class="rounded-circle" src="${authImg}" alt="" style="width: 50px; height: 50px;">
+     <div>
+         <h5>${name}</h5>
+         <p>${date ? date : 'N/A'}</p>
+    </div>
+    <p>View: ${view}</p>
+    </div>
 
-   }
+    `;
+}
 
 
 const loadCategory = () => {

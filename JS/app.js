@@ -9,7 +9,7 @@ const findCategories = (id) => {
     fetch(`https://openapi.programming-hero.com/api/news/category/${id}`)
         .then(res => res.json())
         .then(data => displayNews(data))
-        .catch(error => console.log(error))
+        // .catch(error => console.log(error))
 }
 
 
@@ -85,6 +85,7 @@ const displayNews = (allNewsCategories) => {
         //spinner stop
         loadingSpinner(false)
     })
+    
 
 
     // console.log(arrayNum.sort((a, b) => b-a), arrayElement)
@@ -96,6 +97,21 @@ const displayNews = (allNewsCategories) => {
 
 }
 // findCategories()
+
+   // Modal 
+
+   const modalTitle = document.getElementById('newsModalLabel')
+   const modalBody = document.getElementById('modal-body')
+   const newsModal = (img, title, details) => {
+
+    //    console.log(details)
+       modalTitle.innerText = `${title}`;
+       modalBody.innerHTML = `
+       <img src="${img}" class="w-100 rounded-start" alt="...">
+       
+       `;
+
+   }
 
 
 const loadCategory = () => {
@@ -121,20 +137,7 @@ const displayCategory = (categories) => {
     });
 }
 
-    // Modal 
-
-    const modalTitle = document.getElementById('newsModalLabel')
-    const modalBody = document.getElementById('modal-body')
-    const newsModal = (img, title, details) => {
-
-        console.log(details)
-        modalTitle.innerText = `${title}`;
-        modalBody.innerHTML = `
-        <img src="${img}" class="w-100 rounded-start" alt="...">
-        <p class="mt-4">${details}</p>
-        `;
-
-    }
+ 
 
 
 //spinner function

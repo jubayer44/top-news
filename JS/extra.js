@@ -1,6 +1,6 @@
 const cardsContainer = document.getElementById('cards-container')
 
-
+console.log('connected')
 
 const findCategories = (id) => {
     // spinner start
@@ -40,16 +40,10 @@ const displayNews = (allNewsCategories) => {
 
     }
 
-    // const cardsContainer = document.getElementById('cards-container')
     cardsContainer.textContent = '';
 
-    // let arrayNum = []
-    // let arrayElement = []
     viewCategories.forEach(singleCategories => {
         const { title, image_url, thumbnail_url, details, author, total_view, rating } = singleCategories
-        // arrayNum.push(total_view, singleCategories)  
-        // arrayElement.push(total_view)
-        // console.log(singleCategories.details)
 
         const CardDiv = document.createElement('div')
         CardDiv.classList.add('card', 'mb-3', 'my-3')
@@ -73,7 +67,7 @@ const displayNews = (allNewsCategories) => {
                             </div>
                             <p><i class="fa-regular fa-eye me-2"></i>${total_view}</p>
                             <p>Rating: ${rating.number}</p>
-                            <button onclick="newsModal('${image_url}', '${title}', '${details.slice(0, 95) + '...'}')" class="btn btn-primary h-25" data-bs-toggle="modal" data-bs-target="#newsModal">View</button>
+                            
                         </div>
 
                     </>
@@ -87,31 +81,8 @@ const displayNews = (allNewsCategories) => {
     })
     
 
-
-    // console.log(arrayNum.sort((a, b) => b-a), arrayElement)
-    // function findBySort(element) {
-
-        // console.log(arrayNum.sort((a, b) => b-a))
-       
-    // }
-
 }
 // findCategories()
-
-   // Modal 
-
-   const modalTitle = document.getElementById('newsModalLabel')
-   const modalBody = document.getElementById('modal-body')
-   const newsModal = (img, title, details) => {
-
-       console.log(details)
-       modalTitle.innerText = `${title}`;
-       modalBody.innerHTML = `
-       <img src="${img}" class="w-100 rounded-start" alt="...">
-       <p class="mt-4">${details}</p>
-       `;
-
-   }
 
 
 const loadCategory = () => {
